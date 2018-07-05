@@ -1,0 +1,36 @@
+spring:
+  # 数据库配置
+  datasource:
+    url: jdbc:postgresql://localhost:5432/practice
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  redis:
+    # redis数据库索引（默认为0），我们使用索引为3的数据库，避免和其他数据库冲突
+    database: 3
+    # redis服务器地址（默认为localhost）
+    host: localhost
+    # redis端口（默认为6379）
+    port: 6379
+    # redis访问密码（默认为空）
+    password:
+    # redis连接超时时间（单位为毫秒）
+    timeout: 3000ms
+
+mybatis:
+  type-aliases-package: ff.letsgo.smr.dao.po
+  mapper-locations:
+    - mappers/ProductMapper.xml
+
+---
+spring:
+  profiles: test
+  # 数据库配置
+  datasource:
+    url: jdbc:h2:mem:test
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+    schema: classpath:schema.sql
+    data: classpath:data.sql
